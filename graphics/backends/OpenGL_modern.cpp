@@ -3,11 +3,11 @@
  */
 
 #include <iostream>
-#include "../Graphics.h"
 #include "../glad/include/glad/glad.h"
-#include <GLFW/glfw3.h>
-
-GLFWwindow *window;
+#include "../Graphics.h"
+#define MAININCLUDE
+#include "OpenGL_common.h"
+#undef MAININCLUDE
 
 Graphics::Graphics(int width, int height) {
     if (glfwInit() == GLFW_FALSE) {
@@ -30,15 +30,25 @@ Graphics::Graphics(int width, int height) {
         exit(3);
     }
 
-    while (!glfwWindowShouldClose(window)) {
-        glfwPollEvents();
-        if (glfwGetKey(window, GLFW_KEY_ESCAPE)) {
-            glfwSetWindowShouldClose(window, GLFW_TRUE);
-        }
+}
+
+void Graphics::renderMap() {
+
+}
+
+void Graphics::renderLoop() {
+    glfwPollEvents();
+    renderMap();
+    if (glfwGetKey(window, GLFW_KEY_ESCAPE)) {
+        glfwSetWindowShouldClose(window, GLFW_TRUE);
     }
 }
 
 Graphics::~Graphics() {
     glfwDestroyWindow(window);
     glfwTerminate();
+}
+
+bool Graphics::shouldExit() {
+    return glfwWindowShouldClose(window);
 }

@@ -5,6 +5,8 @@
 #ifndef PIXELTALES_INPUT_H
 #define PIXELTALES_INPUT_H
 
+#include <string>
+
 /* More might be needed eventually */
 typedef enum {
     ACTION_MOVE_CHARACTER_FORWARD = 0,
@@ -32,13 +34,14 @@ typedef struct {
 
 class Input {
 public:
-    Input();
+    Input(const std::string& fileName);
     ~Input();
     bool buttonIsPressed(Action action);
 
 private:
-    Button buttons[ACTION_NUM_ACTIONS];
-    void updateButtons();
+    void parseInputConfigFile(const std::string& fileName);
+    Button buttonStates[ACTION_NUM_ACTIONS]{};
+    void updateButtonStates();
 };
 
 

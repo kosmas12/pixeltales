@@ -7,9 +7,14 @@
 
 
 class Graphics {
+private:
+    void renderMap();
+
 public:
     Graphics(int width, int height);
     ~Graphics();
+    void renderLoop();
+    bool shouldExit();
 };
 
 
