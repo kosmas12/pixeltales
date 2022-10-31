@@ -14,5 +14,6 @@
 #endif
 
 EXTERN GLFWwindow *window;
+EXTERN unsigned int backgroundTexture, backgroundVBO, backgroundVAO, backgroundEBO;
 
 #endif //PIXELTALES_OPENGL_COMMON_H

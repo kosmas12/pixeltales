@@ -5,11 +5,9 @@
 #ifndef PIXELTALES_GRAPHICS_H
 #define PIXELTALES_GRAPHICS_H
 
-
 class Graphics {
 private:
-    void renderMap();
-
+    void renderBackground();
 public:
     Graphics(int width, int height);
     ~Graphics();

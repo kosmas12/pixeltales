@@ -5,7 +5,7 @@
 #include <fstream>
 #include <iostream>
 #include "../Input.h"
-#include "../../graphics/backends/OpenGL_common.h"
+#include "../../graphics/backends/OpenGL/OpenGL_common.h"
 
 Input::Input(const std::string& fileName) {
     this->parseInputConfigFile(fileName);
