@@ -20,7 +20,7 @@ void loadBackground() {
     stbi_set_flip_vertically_on_load(true);
     int textureWidth, textureHeight, numChannels;
     unsigned char *data = stbi_load("data/textures/background1080p.png", &textureWidth, &textureHeight,
-                                    &numChannels, 0);
+                                    &numChannels, 3);
     if (data) {
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, textureWidth, textureHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
         glGenerateMipmap(GL_TEXTURE_2D);
@@ -36,10 +36,10 @@ void loadBackground() {
     }
 
     float mapVertices[] = {
-            1.0f, 1.0f, 0.0f,
-            1.0f, -1.0f, 0.0f,
-            -1.0f, -1.0f, 0.0f,
-            -1.0f, 1.0f, 0.0f
+            1.0f, 1.0f, 0.0f, 1.0f, 1.0f,
+            1.0f, -1.0f, 0.0f, 1.0f, 0.0f,
+            -1.0f, -1.0f, 0.0f, 0.0f, 0.0f,
+            -1.0f, 1.0f, 0.0f, 0.0f, 1.0f
     };
 
     unsigned int indices[] = {
@@ -55,8 +55,10 @@ void loadBackground() {
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, backgroundEBO);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
     glBufferData(GL_ARRAY_BUFFER, sizeof(mapVertices), mapVertices, GL_STATIC_DRAW);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)(0));
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(0));
     glEnableVertexAttribArray(0);
+    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
+    glEnableVertexAttribArray(1);
 
     backgroundProgram = new ShaderProgram("shaders/backgroundVertex.glsl", "shaders/backgroundFragment.glsl");
 
